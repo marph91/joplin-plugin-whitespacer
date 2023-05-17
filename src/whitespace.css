@@ -1,0 +1,17 @@
+:root {
+  --gray: #00ff00;
+}
+.CodeMirror .cm-tab::before {
+  content: "→";
+  color: var(--gray);
+}
+.CodeMirror-line > span::after {
+  content: "¬";
+  color: var(--gray);
+}
+.CodeMirror .cm-whitespace-a::before,
+.CodeMirror .cm-whitespace-b::before {
+  content: "·";
+  color: var(--gray);
+  position: absolute;
+}
