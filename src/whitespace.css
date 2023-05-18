@@ -1,16 +1,27 @@
 :root {
   --gray: #00ff00;
 }
-.CodeMirror .cm-tab::before {
+/* show all whitespaces */
+.CodeMirror .show-all-whitespace .cm-tab::before,
+/* show selected whitespaces */
+.CodeMirror span.selected .cm-tab::before {
   content: "→";
   color: var(--gray);
+  position: absolute;
 }
-.CodeMirror-line > span::after {
+/* show all whitespaces */
+.CodeMirror .show-all-whitespace > .CodeMirror-line > span::after,
+/* show selected whitespaces */
+.CodeMirror .show-line-end > .CodeMirror-line > span::after {
   content: "¬";
   color: var(--gray);
 }
-.CodeMirror .cm-whitespace-a::before,
-.CodeMirror .cm-whitespace-b::before {
+/* show all whitespaces */
+.CodeMirror .show-all-whitespace .cm-whitespace-a::before,
+.CodeMirror .show-all-whitespace .cm-whitespace-b::before,
+/* show selected whitespaces */
+.CodeMirror .cm-whitespace-a.selected::before,
+.CodeMirror .cm-whitespace-b.selected::before {
   content: "·";
   color: var(--gray);
   position: absolute;
