@@ -26,7 +26,7 @@ module.exports = {
       codeMirrorResources: [],
       codeMirrorOptions: { showWhitespaces: true },
       assets: function () {
-        return [{ name: "whitespace.css" }];
+        return [{ name: "whitespacer.css" }];
       },
     };
   },
