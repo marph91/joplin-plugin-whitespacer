@@ -1,6 +1,6 @@
 const overlays = [
   {
-    name: "whitespaces",
+    name: "allWhitespaces",
     token: function (stream) {
       const nextCharacter = stream.next();
       if (nextCharacter === " ") {
@@ -16,7 +16,7 @@ const overlays = [
     togglingLabel: false,
   },
   {
-    name: "trailingspaces",
+    name: "trailingWhitespaces",
     token: function (stream) {
       const stringLengthWithoutTrailingWhitespaces =
         stream.string.trimEnd().length;
@@ -34,7 +34,7 @@ const overlays = [
 ];
 
 module.exports = {
-  default: function (_context) {
+  default: function (context) {
     return {
       plugin: function (CodeMirror) {
         CodeMirror.defineOption("enableWhitespacer", false, (cm, val, prev) => {
@@ -43,10 +43,22 @@ module.exports = {
             for (let overlay of overlays) cm.removeOverlay(overlay);
 
           if (!prev && val) {
-            const enabledOverlays = ["whitespaces", "trailingspaces"];
-            for (let overlay of overlays)
-              if (enabledOverlays.includes(overlay.name))
-                cm.addOverlay(overlay);
+            async function getSetting(timeout: number, name: string) {
+              const enabledOverlay = await context.postMessage({
+                function: "getSetting",
+                name: "whiteSpaceMode",
+              });
+
+              if (enabledOverlay) {
+                for (let overlay of overlays)
+                  if (overlay.name === enabledOverlay) cm.addOverlay(overlay);
+              } else {
+                setTimeout(getSetting, timeout * 2, name);
+              }
+            }
+
+            // Wait until the settings are available.
+            setTimeout(getSetting, 100, "whiteSpaceMode");
           }
         });
       },
