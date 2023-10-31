@@ -13,11 +13,28 @@ module.exports = {
           if (!prev && val) {
             cm.addOverlay({
               name: "whitespaces",
-              token: function nextToken(stream) {
+              token: function (stream) {
                 if (stream.next() === " ") {
                   togglingLabel = !togglingLabel;
                   return `whitespace-${togglingLabel ? "a" : "b"}`;
                 }
+              },
+            });
+
+            cm.addOverlay({
+              name: "trailingspaces",
+              token: function (stream) {
+                const stringLengthWithoutTrailingWhitespaces =
+                  stream.string.trimEnd().length;
+
+                if (stringLengthWithoutTrailingWhitespaces > stream.pos) {
+                  // advance to last char that isn't whitespace
+                  stream.pos = stringLengthWithoutTrailingWhitespaces;
+                  return null;
+                }
+                // rest of the stream are trailing spaces
+                stream.pos++;
+                return "trailingspace";
               },
             });
           }

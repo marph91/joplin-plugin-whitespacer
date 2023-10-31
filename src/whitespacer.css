@@ -1,3 +1,4 @@
+/* all whitespaces */
 .CodeMirror .cm-tab::before {
   content: "→";
   opacity: 0.3;
@@ -11,4 +12,14 @@
   content: "·";
   position: absolute;
   opacity: 0.3;
+}
+
+/* trailing spaces only */
+.CodeMirror .cm-trailingspace > .cm-tab::before {
+  color: "black" !important;
+  opacity: 1 !important;
+}
+.CodeMirror .cm-trailingspace::before {
+  color: "black" !important;
+  opacity: 1 !important;
 }
