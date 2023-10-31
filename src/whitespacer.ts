@@ -2,10 +2,13 @@ const overlays = [
   {
     name: "whitespaces",
     token: function (stream) {
-      if (stream.next() === " ") {
-        console.log(this.togglingLabel);
+      const nextCharacter = stream.next();
+      if (nextCharacter === " ") {
         this.togglingLabel = !this.togglingLabel;
-        return `whitespace-${this.togglingLabel ? "a" : "b"}`;
+        return `ws-whitespace-${this.togglingLabel ? "a" : "b"}`;
+      } else if (nextCharacter === "	") {
+        // TODO: why doesn't "\t" work?
+        return "ws-whitespace-tab";
       }
     },
     // We need two separate classes for consecutive space characters.
@@ -25,7 +28,7 @@ const overlays = [
       }
       // rest of the stream are trailing spaces
       stream.pos++;
-      return "trailingspace";
+      return "ws-trailingspace";
     },
   },
 ];
