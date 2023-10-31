@@ -27,9 +27,15 @@ const overlays = [
         return null;
       }
       // rest of the stream are trailing spaces
-      stream.pos++;
-      return "ws-trailingspace";
+      const nextCharacter = stream.next();
+      if (nextCharacter === " ") {
+        this.togglingLabel = !this.togglingLabel;
+        return `ws-trailingspace-${this.togglingLabel ? "a" : "b"}`;
+      } else if (nextCharacter === "	") {
+        return "ws-trailingspace-tab";
+      }
     },
+    togglingLabel: false,
   },
 ];
 

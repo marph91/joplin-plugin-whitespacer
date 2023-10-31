@@ -1,11 +1,12 @@
 .CodeMirror .cm-ws-whitespace-tab > .cm-tab::before,
-.CodeMirror .cm-ws-trailingspace > .cm-tab::before {
+.CodeMirror .cm-ws-trailingspace-tab > .cm-tab::before {
   content: "→";
   opacity: 0.3;
 }
 .CodeMirror .cm-ws-whitespace-a::before,
 .CodeMirror .cm-ws-whitespace-b::before,
-.CodeMirror .cm-ws-trailingspace::before {
+.CodeMirror .cm-ws-trailingspace-a::before,
+.CodeMirror .cm-ws-trailingspace-b::before {
   content: "·";
   position: absolute;
   opacity: 0.3;
