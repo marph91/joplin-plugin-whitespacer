@@ -2,7 +2,8 @@
   content: "→";
   opacity: 0.3;
 }
-.CodeMirror-line > span::after {
+.CodeMirror-line > span::after,
+.cm-line::after {
   content: "¬";
   opacity: 0.3;
 }
