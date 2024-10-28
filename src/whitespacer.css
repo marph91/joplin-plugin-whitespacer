@@ -5,9 +5,18 @@
   opacity: 0.3;
 }
 
-.CodeMirror-line > span::after,
-.cm-line::after {
+/* Codemirror 5 */
+.CodeMirror-line > span:last-of-type::after,
+/* Codemirror 6 renders a <br> at empty lines.
+   Make sure that the ¬ is rendered before the <br>.
+   https://stackoverflow.com/a/53173276/7410886 */
+.cm-line:not(:has(br))::after {
   content: "¬";
+  opacity: 0.3;
+}
+.cm-line:has(br)::before {
+  content: "¬";
+  position: absolute;
   opacity: 0.3;
 }
 
