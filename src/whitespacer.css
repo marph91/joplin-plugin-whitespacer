@@ -1,14 +1,18 @@
-.CodeMirror .cm-tab::before {
+.CodeMirror .cm-tab-a::before,
+.CodeMirror .cm-tab-b::before {
   content: "→";
+  position: absolute;
   opacity: 0.3;
 }
+
 .CodeMirror-line > span::after,
 .cm-line::after {
   content: "¬";
   opacity: 0.3;
 }
-.CodeMirror .cm-whitespace-a::before,
-.CodeMirror .cm-whitespace-b::before {
+
+.CodeMirror .cm-space-a::before,
+.CodeMirror .cm-space-b::before {
   content: "·";
   position: absolute;
   opacity: 0.3;

@@ -8,15 +8,20 @@ module.exports = {
 
           // We need two separate classes for consecutive space characters.
           // Else all spaces after the first one are ignored (not sure why).
-          let togglingLabel = false;
+          let togglingLabelSpace = false;
+          let togglingLabelTab = false;
 
           if (!prev && val) {
             cm.addOverlay({
               name: "whitespaces",
               token: function nextToken(stream) {
-                if (stream.next() === " ") {
-                  togglingLabel = !togglingLabel;
-                  return `whitespace-${togglingLabel ? "a" : "b"}`;
+                switch (stream.next()) {
+                  case " ":
+                    togglingLabelSpace = !togglingLabelSpace;
+                    return `space-${togglingLabelSpace ? "a" : "b"}`;
+                  case "\t":
+                    togglingLabelTab = !togglingLabelTab;
+                    return `tab-${togglingLabelTab ? "a" : "b"}`;
                 }
               },
             });
